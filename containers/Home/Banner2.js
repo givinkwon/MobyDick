@@ -105,7 +105,7 @@ class NewBanner2Container extends React.Component {
               //   })
 
               
-
+ 
           // KRWUSD data
           const KRWUSD = {
             url : 'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD',
