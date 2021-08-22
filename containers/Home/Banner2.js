@@ -11,11 +11,10 @@ import axios from "axios";
 class NewBanner2Container extends React.Component {
    async componentDidMount () {
     const { Price } = this.props;
-      
-      // bitmex 
-      let bybit = new ccxt.bybit({        
-        'enableRateLimit': true,  // required by the Manual
-      })
+
+      // let bybit = new ccxt.bybit({        
+      //   'enableRateLimit': true,  // required by the Manual
+      // })
       let bitmex = new ccxt.bitmex()
       let coinone = new ccxt.coinone()
       let ftx = new ccxt.ftx()
@@ -36,7 +35,7 @@ class NewBanner2Container extends React.Component {
       // 5초 주기로 반복
       setInterval(() => {
 
-          console.log(bitmex.loadMarkets(), coinone.loadMarkets(), ftx.loadMarkets(), bybit.loadMarkets())
+          //console.log(bitmex.loadMarkets(), coinone.loadMarkets(), ftx.loadMarkets(), bybit.loadMarkets())
           // symbol list
           // console.log(binance.loadMarkets ())
           // console.log(binance_futures.loadMarkets())
@@ -86,16 +85,16 @@ class NewBanner2Container extends React.Component {
             
             // coinbase data
 
-              //비동기 처리
-            if (bybit.has.fetchOHLCV) {
-              console.log(bybit.fetchOHLCV ('BTC/USD', '1m', null, 200))
-              bybit.fetchOHLCV ('BTC/USD', '1m', null, 200).then(function(bybit_price) {
-                console.log(bybit_price)
-                // 500번째가 최근 가격
-                Price.coinbase_price = bithumb_data[1499][4]
+            //   //비동기 처리
+            // if (bybit.has.fetchOHLCV) {
+            //   console.log(bybit.fetchOHLCV ('BTC/USD', '1m', null, 200))
+            //   bybit.fetchOHLCV ('BTC/USD', '1m', null, 200).then(function(bybit_price) {
+            //     console.log(bybit_price)
+            //     // 500번째가 최근 가격
+            //     Price.coinbase_price = bithumb_data[1499][4]
 
-                })
-              }
+            //     })
+            //  }
               
               // coinbase.fetchOHLCV ('BTC/KRW', '1m').then(function(coinbase_price2) {
               //   console.log(coinbase_price2)
@@ -104,8 +103,12 @@ class NewBanner2Container extends React.Component {
 
               //   })
 
-              
- 
+          const bybit = {
+            url : 'https://api.bybit.com/v2/public/tickers',
+            method : 'GET'
+          }    
+          axios(bybit).then(res => console.log(res))
+
           // KRWUSD data
           const KRWUSD = {
             url : 'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD',
