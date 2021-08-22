@@ -6,11 +6,8 @@ import App from "next/app";
 
 import { Provider } from "mobx-react";
 import { createGlobalStyle } from "styled-components";
-import IE from "components/IE";
 import ScrollToTop from "components/ScrollToTop";
 import stores from "stores";
-import CheckBrowserModal from "containers/Home/Common/CheckBrowserModal";
-import PrepareModal from "containers/Home/Common/PrepareModal";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // CSS Reset Code
@@ -144,10 +141,6 @@ class MyApp extends App {
       <ScrollToTop>
         {console.log(this.state.modal_shown)}
         <GlobalStyle />
-        <CheckBrowserModal
-          open={!this.state.modal_shown && this.state.ie_user}
-          handleClose={this.closeModal}
-        />
 
         <Provider {...stores}>
           <Component {...pageProps} />

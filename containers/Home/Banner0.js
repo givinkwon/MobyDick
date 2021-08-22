@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import Containerv1 from "../../components/Containerv1";
+import Containerv1 from "components/Containerv1";
 import * as Title from "components/Title";
 import * as Text from "components/Text";
-import SearchBar from "./SearchBar";
 
-const banner0img = "/static/images/banner0img.svg";
+
+const banner0img = "/static/images/icons8-bitcoin.gif";
 
 class Banner0Container extends React.Component {
+
   render() {
     return (
       <div
@@ -21,14 +22,13 @@ class Banner0Container extends React.Component {
         <Containerv1 style={{ gap: 130, alignItems: "center" }}>
           <LeftBox>
             <Header>
-              대한민국 제조사 정보
+              전세계 코인 데이터
               <br />
               여기 다 있다.
             </Header>
 
-            <Middle>당신에게 맞는 제조사 정보를 바로 조회해보세요.</Middle>
+            <Middle>김치 프리미엄 / 코인 데이터 / HTS</Middle>
 
-            <SearchBar />
           </LeftBox>
 
           <img src={banner0img} style={{ marginTop: 40 }} />

@@ -4,50 +4,32 @@ import Router from "next/router";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import Nav from "components/Nav";
-import MobileNav from "components/MobileNav";
-import Footer from "components/Footer";
-import Spinner from "components/Spinner";
 // test
 import HomeConatiner from "containers/Home";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { toJS } from "mobx";
+
 
 const logo_ic = "/static/images/components/MobileNav/MobileLogo.svg";
 
-@inject("Home", "Loading", "Auth", "Category")
-@observer
 class Home extends React.Component {
   state = {
     width: null,
-    home_index: 1,
   };
   async componentDidMount() {
-    this.props.Loading.setOpen(true);
-
-    this.props.Auth.home_index = 0;
-    console.log("home didmount");
-    this.props.Auth.previous_url = "";
-
     window.addEventListener("resize", this.updateDimensions);
     this.setState({ ...this.state, width: window.innerWidth });
-    setTimeout(() => {
-      this.props.Loading.setOpen(false);
-    }, 1000);
-
-    await this.props.Auth.checkLogin();
-    console.log("배포 테스트");
   }
+
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions);
   }
   updateDimensions = () => {
     this.setState({ ...this.state, width: window.innerWidth });
   };
+
   render() {
-    const { Loading, Home } = this.props;
-    const { width, home_index } = this.state;
+    const { width } = this.state;
     return (
       <>
         <Head>
@@ -73,22 +55,17 @@ class Home extends React.Component {
           />
           <meta property="og:url" content="https://www.boltnnut.com/" />
           {/* Title */}
-          <title>볼트앤너트</title>
+          <title>MOBYDICK</title>
         </Head>
 
         <div onContextMenu={(e) => e.preventDefault()}>
-          {Loading.is_open}
 
-          <>
-            {width && width < 768 && <MobileNav src={logo_ic} width={width} />}
-            {width && width > 767.98 && <Nav width={width} />}
-          </>
           <>
             {width && (
               <HomeConatiner width={width} reqList={Home.request_list} /> // 볼트앤너트 메인 페이지
             )}
           </>
-          <>{width && <Footer />}</>
+
         </div>
       </>
     );
