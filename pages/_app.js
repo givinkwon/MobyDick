@@ -93,48 +93,8 @@ class MyApp extends App {
   componentDidMount() {
     const { Home } = this.props;
     const userAgent = window.navigator.userAgent;
-
-    // 네이버 애널리틱스
-    this.setState({
-      location: window.location,
-    });
-    if (!window.wcs_add) window.wcs_add = {};
-    window.wcs_add["wa"] = "a888b15a2864e";
-    if (window.wcs) {
-      window.wcs_do();
-    }
-    console.log(userAgent.toLowerCase());
-
-    if (
-      userAgent.indexOf("MSIE ") !== -1 ||
-      userAgent.indexOf(".NET") !== -1 ||
-      userAgent.indexOf("Edge") !== -1
-    ) {
-      this.setState({
-        ...this.state,
-        ie_user: true,
-      });
-    }
-
-    if (window.location.pathname !== "/") {
-      this.setState({
-        ...this.state,
-        prepare: false,
-      });
-    }
-
-    const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles && jssStyles.parentNode)
-      jssStyles.parentNode.removeChild(jssStyles);
   }
-  // 네이버애널리틱스
-  componentDidUpdate() {
-    if (!window.wcs_add) window.wcs_add = {};
-    window.wcs_add["wa"] = "a888b15a2864e";
-    if (window.wcs) {
-      window.wcs_do();
-    }
-  }
+  
   render() {
     const { Component, pageProps, Home } = this.props;
     return (

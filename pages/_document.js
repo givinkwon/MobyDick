@@ -492,7 +492,9 @@ export default class MyDocument extends Document {
             src="https://www.googletagmanager.com/gtag/js?id=UA-162026812-1"
           ></script>
           <script dangerouslySetInnerHTML={this.setGoogleTags()} />
-
+          
+          {/*TradingView*/}
+          <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
           {/* Iamport */}
           <script
             type="text/javascript"
