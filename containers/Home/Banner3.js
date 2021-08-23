@@ -7,10 +7,40 @@ import Containerv1 from "components/Containerv1";
 @inject("Price")
 @observer
 class NewBanner3Container extends React.Component {
-  async componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
   }
 
+  async componentDidMount() {
+    const scriptSrc = document.createElement('script');
+    const script = document.createElement('script');
+    scriptSrc.src = 'https://s3.tradingview.com/tv.js';
+    scriptSrc.async = true;
+
+    script.innerHTML = new window.TradingView.widget(
+      {
+
+      "container_id": "tradingview_7bf97",
+      "autosize": true,
+      "symbol": "(UPBIT:BTCKRW-BYBIT:BTCUSD*FX_IDC:USDKRW)/(BYBIT:BTCUSD*FX_IDC:USDKRW)*100",
+      "interval": "D",
+      "timezone": "Etc/UTC",
+      "theme": "light",
+      "style": "1",
+      "locale": "kr",
+      "toolbar_bg": "#f1f3f6",
+      "enable_publishing": false,
+      "allow_symbol_change": true,
+    }
+      );
+    this.myRef.current.appendChild(scriptSrc);
+    this.myRef.current.appendChild(script);
+  }
+  
+
   render() {
+
     // id는 실제 DB의 id로 해야함
     const nameTable = [
 
@@ -74,6 +104,9 @@ class NewBanner3Container extends React.Component {
               </CategoryTitle>
             ))}
           </CategoryBox>
+          <div className="tradingview-widget-container" ref={this.myRef}>
+            <div style={{height: "900px"}} id="tradingview_7bf97"></div>
+          </div>
 
 
         </Containerv1>
