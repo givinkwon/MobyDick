@@ -8,6 +8,7 @@ import Banner2Container from "./Banner2";
 import Banner3Container from "./Banner3";
 
 
+
 import { inject, observer } from "mobx-react";
 import axios from "axios";
 
@@ -41,6 +42,7 @@ class HomeConatiner extends React.Component {
               <Banner0Container width={width} />
               <Banner2Container width={width} />
               <Banner3Container width={width} />
+ 
             </div>
     )
 }

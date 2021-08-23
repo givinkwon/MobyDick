@@ -6,7 +6,6 @@ import Containerv1 from "components/Containerv1";
 import ccxt from "ccxt"
 import axios from "axios";
 
-
 @inject("Price")
 @observer
 class NewBanner2Container extends React.Component {
@@ -37,10 +36,25 @@ class NewBanner2Container extends React.Component {
       // bithumb
       let bithumb = new ccxt.bithumb()
 
-
       // 5초 주기로 반복
       setInterval(() => {
-
+          
+          axios({
+            method: 'GET',
+            url: 'https://cors-anywhere.herokuapp.com/https://www.investing.com/common/modules/js_instrument_chart/api/data.php',
+            params: {
+              pair_id: 'currencies/eur-usd',
+              pair_interval: 3600,
+              chart_type: 'area', // 'area', 'candlestick'
+              candle_count: 24,
+              volume_series: 'no',
+              events: 'no',
+              period: '1-day'
+            },
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          }).then((res) => console.log(res))
           //console.log(bitmex.loadMarkets(), coinone.loadMarkets(), ftx.loadMarkets(), bybit.loadMarkets())
           // symbol list
           // console.log(binance.loadMarkets ())

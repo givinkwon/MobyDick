@@ -3,8 +3,9 @@ import styled from "styled-components";
 import * as Title from "components/Title";
 import { inject, observer } from "mobx-react";
 import Containerv1 from "components/Containerv1";
+import { Router } from "react-router-dom";
 
-@inject("Price")
+@inject("Price", "Chart")
 @observer
 class NewBanner3Container extends React.Component {
   constructor(props) {
@@ -12,61 +13,101 @@ class NewBanner3Container extends React.Component {
     this.myRef = React.createRef();
   }
 
-  async componentDidMount() {
-    const scriptSrc = document.createElement('script');
-    const script = document.createElement('script');
-    scriptSrc.src = 'https://s3.tradingview.com/tv.js';
-    scriptSrc.async = true;
-
-    script.innerHTML = new window.TradingView.widget(
-      {
-
-      "container_id": "tradingview_7bf97",
-      "autosize": true,
-      "symbol": "(UPBIT:BTCKRW-BYBIT:BTCUSD*FX_IDC:USDKRW)/(BYBIT:BTCUSD*FX_IDC:USDKRW)*100",
-      "interval": "D",
-      "timezone": "Etc/UTC",
-      "theme": "light",
-      "style": "1",
-      "locale": "kr",
-      "toolbar_bg": "#f1f3f6",
-      "enable_publishing": false,
-      "allow_symbol_change": true,
-    }
-      );
-    this.myRef.current.appendChild(scriptSrc);
-    this.myRef.current.appendChild(script);
-  }
+  componentDidMount() {
+    const {Chart, Price } = this.props;
+    // chart init => iframe은 window가 로딩되고 나서 해야하므로 setTimeout 사용
+    window.setTimeout(function () { 
+      const scriptSrc = document.createElement('script');
+      const script = document.createElement('script');
+      scriptSrc.src = 'https://s3.tradingview.com/tv.js';
+      scriptSrc.async = true;
   
+      scriptSrc.innerHTML = new window.TradingView.widget(
+        {
+  
+        "container_id": "tradingview_7bf97",
+        "autosize": true,
+        "symbol": Chart.BTC_Binance_Upbit,
+        "interval": "D",
+        "timezone": "Etc/UTC",
+        "theme": "light",
+        "style": "1",
+        "locale": "kr",
+        "toolbar_bg": "#f1f3f6",
+        "enable_publishing": false,
+        "allow_symbol_change": true
+      }
+        );
+      this.myRef && this.myRef.current.appendChild(scriptSrc);
+      }, 1000);
+  }
+
+  change_chart = (coin, exchange) => {
+    const { Chart } = this.props;
+    // 코인 설정
+    Chart.set_current_coin(coin)
+    // 거래소 설정
+    Chart.set_current_exchange(exchange)
+
+    // symbol 설정
+    Chart.set_current_symbol()
+
+    this.myRef = React.createRef();
+
+    window.setTimeout(function () { 
+      const scriptSrc = document.createElement('script');
+      const script = document.createElement('script');
+      scriptSrc.src = 'https://s3.tradingview.com/tv.js';
+      scriptSrc.async = true;
+  
+      scriptSrc.innerHTML = new window.TradingView.widget(
+        {
+  
+        "container_id": "tradingview_7bf97",
+        "autosize": true,
+        "symbol": Chart.current_symbol,
+        "interval": "D",
+        "timezone": "Etc/UTC",
+        "theme": "light",
+        "style": "1",
+        "locale": "kr",
+        "toolbar_bg": "#f1f3f6",
+        "enable_publishing": false,
+        "allow_symbol_change": true
+      }
+        );
+      this.myRef && this.myRef.current.appendChild(scriptSrc);
+      }, 1000);
+  }
 
   render() {
-
+    const {Chart, Price } = this.props;
     // id는 실제 DB의 id로 해야함
     const nameTable = [
 
-      { id: 1, name: "바이낸스-업비트" },
-      { id: 2, name: "코인베이스-업비트" },
-      { id: 3, name: "바이낸스-빗썸" },
-      { id: 4, name: "코인베이스-빗썸" },
+      { id: 1, name: "바이낸스-업비트", value: "Binance-Upbit" },
+      { id: 2, name: "바이낸스-빗썸",  value: "Binance-Bithumb" },
+      { id: 3, name: "바이비트-업비트",  value: "Bybit-Upbit" },
+      { id: 4, name: "바이비트-빗썸",  value: "Bybit-Bithumb"},
 
     ];
 
     const coinList = [
-      { id: 1, name: "비트코인" },
-      { id: 2, name: "이더리움" },
-      { id: 3, name: "이더리움클래식" },
-      { id: 4, name: "에이다" },
-      { id: 5, name: "리플" },
-      { id: 6, name: "이오스" },
-      { id: 7, name: "비트코인캐시" },
-      { id: 8, name: "라이트코인" },
-      { id: 9, name: "체인링크" },
-      { id: 10, name: "폴카닷" },
-      { id: 11, name: "퀀텀" },
-      { id: 12, name: "도지코인" },
-      { id: 13, name: "스텔라루멘" },
-      { id: 14, name: "비체인" },
-      { id: 15, name: "트론" },
+      { id: 1, name: "비트코인", value: "BTC" },
+      { id: 2, name: "이더리움", value: "ETH" },
+      // { id: 3, name: "이더리움클래식" },
+      // { id: 4, name: "에이다" },
+      { id: 5, name: "리플", value: "XRP" },
+      { id: 6, name: "이오스", value: "EOS" },
+      // { id: 7, name: "비트코인캐시" },
+      // { id: 8, name: "라이트코인" },
+      // { id: 9, name: "체인링크" },
+      // { id: 10, name: "폴카닷" },
+      // { id: 11, name: "퀀텀" },
+      // { id: 12, name: "도지코인" },
+      // { id: 13, name: "스텔라루멘" },
+      // { id: 14, name: "비체인" },
+      // { id: 15, name: "트론" },
     ];
 
 
@@ -89,6 +130,9 @@ class NewBanner3Container extends React.Component {
             {nameTable.map((v, idx) => (
               <CategoryTitle
                 key={v.id}
+                onClick={() => 
+                  this.change_chart(Chart.current_coin, v.value)
+                }
               >
                 {v.name}
               </CategoryTitle>
@@ -99,6 +143,9 @@ class NewBanner3Container extends React.Component {
             {coinList.map((v, idx) => (
               <CategoryTitle
                 key={v.id}
+                onClick={() => 
+                  this.change_chart(v.value, Chart.current_exchange)
+                }
               >
                 {v.name}
               </CategoryTitle>
