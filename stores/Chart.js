@@ -31,7 +31,7 @@ class Chart {
     @observable current_coin = "BTC"
     
     // 현재 symbol
-    @observable current_symbol = this.BTC_Binance_Upbit
+    @observable current_symbol = ""
 
     // 코인 선택하기
     @action set_current_coin = (coin) => {
@@ -48,60 +48,62 @@ class Chart {
     // symbol 선택하기
     @action set_current_symbol = () => {
             // BTC
-            if(Chart.coin == "BTC" && Chart.exchange == "Binance-Upbit"){
-                Chart.symbol = Chart.BTC_Binance_Upbit
+            if(this.current_coin == "BTC" && this.current_exchange == "Binance-Upbit"){
+                this.current_symbol = this.BTC_Binance_Upbit   
             }
-            if(Chart.coin == "BTC" && Chart.exchange == "Binance-Bithumb"){
-                Chart.symbol = Chart.BTC_Binance_Bithumb
+            if(this.current_coin == "BTC" && this.current_exchange == "Binance-Bithumb"){
+                this.current_symbol = this.BTC_Binance_Bithumb
             }
-            if(Chart.coin == "BTC" && Chart.exchange == "Bybit-Upbit"){
-                Chart.symbol = Chart.BTC_Bybit_Upbit
+            if(this.current_coin == "BTC" && this.current_exchange == "Bybit-Upbit"){
+                this.current_symbol = this.BTC_Bybit_Upbit
             }
-            if(Chart.coin == "BTC" && Chart.exchange == "Bybit-Bithumb"){
-                Chart.symbol = Chart.BTC_Bybit_Bithumb
+            if(this.current_coin == "BTC" && this.current_exchange == "Bybit-Bithumb"){
+                this.current_symbol = this.BTC_Bybit_Bithumb
             }
 
             // ETH
-            if(Chart.coin == "ETH" && Chart.exchange == "Binance-Upbit"){
-                Chart.symbol = Chart.ETH_Binance_Upbit
+            if(this.current_coin == "ETH" && this.current_exchange == "Binance-Upbit"){
+                this.current_symbol = this.ETH_Binance_Upbit
             }
-            if(Chart.coin == "ETH" && Chart.exchange == "Binance-Bithumb"){
-                Chart.symbol = Chart.ETH_Binance_Bithumb
+            if(this.current_coin == "ETH" && this.current_exchange == "Binance-Bithumb"){
+                this.current_symbol = this.ETH_Binance_Bithumb
             }
-            if(Chart.coin == "ETH" && Chart.exchange == "Bybit-Upbit"){
-                Chart.symbol = Chart.ETH_Bybit_Upbit
+            if(this.current_coin == "ETH" && this.current_exchange == "Bybit-Upbit"){
+                this.current_symbol = this.ETH_Bybit_Upbit
             }
-            if(Chart.coin == "ETH" && Chart.exchange == "Bybit-Bithumb"){
-                Chart.symbol = Chart.ETH_Bybit_Bithumb
+            if(this.current_coin == "ETH" && this.current_exchange == "Bybit-Bithumb"){
+                this.current_symbol = this.ETH_Bybit_Bithumb
             }
 
             // XRP
-            if(Chart.coin == "XRP" && Chart.exchange == "Binance-Upbit"){
-                Chart.symbol = Chart.XRP_Binance_Upbit
+            if(this.current_coin == "XRP" && this.current_exchange == "Binance-Upbit"){
+                this.current_symbol = this.XRP_Binance_Upbit
             }
-            if(Chart.coin == "XRP" && Chart.exchange == "Binance-Bithumb"){
-                Chart.symbol = Chart.XRP_Binance_Bithumb
+            if(this.current_coin == "XRP" && this.current_exchange == "Binance-Bithumb"){
+                this.current_symbol = this.XRP_Binance_Bithumb
             }
-            if(Chart.coin == "XRP" && Chart.exchange == "Bybit-Upbit"){
-                Chart.symbol = Chart.XRP_Bybit_Upbit
+            if(this.current_coin == "XRP" && this.current_exchange == "Bybit-Upbit"){
+                this.current_symbol = this.XRP_Bybit_Upbit
             }
-            if(Chart.coin == "XRP" && Chart.exchange == "Bybit-Bithumb"){
-                Chart.symbol = Chart.XRP_Bybit_Bithumb
+            if(this.current_coin == "XRP" && this.current_exchange == "Bybit-Bithumb"){
+                this.current_symbol = this.XRP_Bybit_Bithumb
             }
 
             // EOS
-            if(Chart.coin == "EOS" && Chart.exchange == "Binance-Upbit"){
-                Chart.symbol = Chart.EOS_Binance_Upbit
+            if(this.current_coin == "EOS" && this.current_exchange == "Binance-Upbit"){
+                this.current_symbol = this.EOS_Binance_Upbit
             }
-            if(Chart.coin == "EOS" && Chart.exchange == "Binance-Bithumb"){
-                Chart.symbol = Chart.EOS_Binance_Bithumb
+            if(this.current_coin == "EOS" && this.current_exchange == "Binance-Bithumb"){
+                this.current_symbol = this.EOS_Binance_Bithumb
             }
-            if(Chart.coin == "EOS" && Chart.exchange == "Bybit-Upbit"){
-                Chart.symbol = Chart.EOS_Bybit_Upbit
+            if(this.current_coin == "EOS" && this.current_exchange == "Bybit-Upbit"){
+                this.current_symbol = this.EOS_Bybit_Upbit
             }
-            if(Chart.coin == "EOS" && Chart.exchange == "Bybit-Bithumb"){
-                Chart.symbol = Chart.EOS_Bybit_Bithumb
+            if(this.current_coin == "EOS" && this.current_exchange == "Bybit-Bithumb"){
+                this.current_symbol = this.EOS_Bybit_Bithumb
             }
+
+            console.log(this.current_symbol)
     }
  }
 
