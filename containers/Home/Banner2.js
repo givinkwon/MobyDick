@@ -16,10 +16,11 @@ class NewBanner2Container extends React.Component {
 
    async componentDidMount () {
     const { Price } = this.props;
-    // 3초마다 반복 호출
+    Price.Patch_data()
+    // 15초마다 반복 호출
     setInterval(function() {
       Price.Patch_data()
-   }, 3000);
+   }, 15000);
   }
 
   render() {
