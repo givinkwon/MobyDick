@@ -5,6 +5,19 @@ import { inject, observer } from "mobx-react";
 import Containerv1 from "components/Containerv1";
 import { Router } from "react-router-dom";
 
+// image
+const upbit = "/static/images/upbit.svg";
+const bybit = "/static/images/bybit.svg";
+const binance = "/static/images/binance.svg";
+const bithumb = "/static/images/bithumb.png";
+
+// symbol
+const btc = "/static/images/btc.svg";
+const eth = "/static/images/eth.svg";
+const eos = "/static/images/eos.svg";
+const xrp = "/static/images/xrp.svg";
+
+
 @inject("Price", "Chart")
 @observer
 class NewBanner3Container extends React.Component {
@@ -85,20 +98,20 @@ class NewBanner3Container extends React.Component {
     // id는 실제 DB의 id로 해야함
     const nameTable = [
 
-      { id: 1, name: "바이낸스-업비트", value: "Binance-Upbit" },
-      { id: 2, name: "바이낸스-빗썸",  value: "Binance-Bithumb" },
-      { id: 3, name: "바이비트-업비트",  value: "Bybit-Upbit" },
-      { id: 4, name: "바이비트-빗썸",  value: "Bybit-Bithumb"},
+      { id: 1, name: "바이낸스-업비트", image1: binance, image2: upbit, value: "Binance-Upbit" },
+      { id: 2, name: "바이낸스-빗썸", image1: binance, image2: bithumb,  value: "Binance-Bithumb" },
+      { id: 3, name: "바이비트-업비트", image1: bybit, image2: upbit ,  value: "Bybit-Upbit" },
+      { id: 4, name: "바이비트-빗썸", image1: bybit, image2: bithumb,  value: "Bybit-Bithumb"},
 
     ];
 
     const coinList = [
-      { id: 1, name: "비트코인", value: "BTC" },
-      { id: 2, name: "이더리움", value: "ETH" },
+      { id: 1, name: "비트코인", image1: btc, value: "BTC" },
+      { id: 2, name: "이더리움", image1: eth, value: "ETH" },
       // { id: 3, name: "이더리움클래식" },
       // { id: 4, name: "에이다" },
-      { id: 5, name: "리플", value: "XRP" },
-      { id: 6, name: "이오스", value: "EOS" },
+      { id: 5, name: "리플", image1: xrp, value: "XRP" },
+      { id: 6, name: "이오스", image1: eos, value: "EOS" },
       // { id: 7, name: "비트코인캐시" },
       // { id: 8, name: "라이트코인" },
       // { id: 9, name: "체인링크" },
@@ -134,6 +147,8 @@ class NewBanner3Container extends React.Component {
                   this.change_chart(Chart.current_coin, v.value)
                 }
               >
+                <img style={{height:25, marginRight: 10}} src={v.image1}/>
+                <img style={{height:25, marginRight: 10}} src={v.image2}/>
                 {v.name}
               </CategoryTitle>
             ))}
@@ -147,6 +162,7 @@ class NewBanner3Container extends React.Component {
                   this.change_chart(v.value, Chart.current_exchange)
                 }
               >
+                <img src={v.image1} style={{ height : 25, marginRight : 10 }}/>
                 {v.name}
               </CategoryTitle>
             ))}
