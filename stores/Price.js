@@ -2,6 +2,10 @@ import { observable, action } from "mobx";
 import * as DataAPI from "../axios/data";
 
 class Price {
+
+  // 거래소 선택 => 0 : 바이낸스-업비트, 1 : 바이낸스-빗썸, 2 : 바이비트-업비트, 3 : 바이비트-빗썸
+  @observable SelectExchange = 0;
+
   //binance
   @observable binance_btc = 0;
   @observable binance_eth = 0;
